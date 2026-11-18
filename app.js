@@ -145,6 +145,19 @@ const workoutListEl = document.getElementById("workoutList");
 const modalEl = document.getElementById("mediaModal");
 const modalImageEl = document.getElementById("modalImage");
 
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function autoResizeTextarea(el) {
+  el.style.height = "auto";
+  el.style.height = `${el.scrollHeight}px`;
+}
+
 function renderWorkouts() {
   workoutListEl.innerHTML = EXERCISES.map((ex) => {
     const savedWeight = weights[ex.id] ?? "";
@@ -169,21 +182,20 @@ function renderWorkouts() {
         <div class="col-weight">
           <label class="mobile-weight-label" for="weight-${ex.id}">Mức tạ:</label>
           <div class="input-wrap">
-            <input
+            <textarea
               id="weight-${ex.id}"
               class="weight-input"
-              type="text"
-              inputmode="decimal"
-              pattern="[0-9.,]*"
-              value="${String(savedWeight).replace(/"/g, "&quot;")}"
+              rows="1"
               data-weight-id="${ex.id}"
               aria-label="Mức tạ bài ${ex.name}"
-            />
+            >${escapeHtml(savedWeight)}</textarea>
           </div>
         </div>
       </article>
     `;
   }).join("");
+
+  workoutListEl.querySelectorAll(".weight-input").forEach(autoResizeTextarea);
 }
 
 // Lưu mức tạ tự động mỗi khi nhập, thay đổi hoặc xóa
@@ -191,6 +203,7 @@ function handleWeightSave(e) {
   const input = e.target.closest(".weight-input");
   if (!input) return;
 
+  autoResizeTextarea(input);
   const id = input.dataset.weightId;
   const val = input.value;
   if (val === "") {

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#08080e" />
+  <title>Giáo Án Upper Body Toàn Diện</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
+
+  <main class="container">
+    <!-- Header -->
+    <header class="hero">
+      <div class="hero-top">
+        <div class="hero-title-wrap">
+          <div class="hero-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6.5 6.5v11" />
+              <path d="M17.5 6.5v11" />
+              <path d="M3.5 9v6" />
+              <path d="M20.5 9v6" />
+              <path d="M6.5 12h11" />
+            </svg>
+          </div>
+          <div>
+            <h1>GIÁO ÁN <span>UPPER BODY</span></h1>
+            <p class="subtitle">TOÀN DIỆN</p>
+          </div>
+        </div>
+        <div class="rep-badge">2 Sets &times; 10–12 Reps</div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-pill">
+          <span class="meta-label">Tổng:</span>
+          <strong>12 bài tập</strong>
+        </div>
+        <div class="meta-pill">
+          <span class="meta-label">Mỗi bài:</span>
+          <strong>2 hiệp</strong>
+        </div>
+        <div class="meta-pill">
+          <span class="meta-label">Nghỉ:</span>
+          <strong>60s – 2p (tùy bài)</strong>
+        </div>
+      </div>
+    </header>
+
+    <!-- Workout Table -->
+    <section class="workout-card" aria-label="Danh sách bài tập và mức tạ">
+      <div class="table-header">
+        <div class="col-stt">STT</div>
+        <div class="col-thumb">Hình</div>
+        <div class="col-exercise">Bài tập &amp; Nhóm cơ</div>
+        <div class="col-guide">Hướng dẫn kỹ thuật</div>
+        <div class="col-weight">Mức tạ (kg)</div>
+      </div>
+
+      <div id="workoutList" class="workout-list">
+        <!-- Rendered by app.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal GIF / Video minh họa -->
+  <div id="mediaModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span id="modalBadge" class="muscle-tag"></span>
+          <h2 id="modalTitle" class="modal-title"></h2>
+        </div>
+        <button type="button" id="modalCloseBtn" class="modal-close" aria-label="Đóng">&times;</button>
+      </div>
+      <div class="modal-media-wrap">
+        <img id="modalImage" class="modal-image" src="" alt="" />
+      </div>
+      <p id="modalGuide" class="modal-guide"></p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

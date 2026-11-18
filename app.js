@@ -1,0 +1,237 @@
+const EXERCISES = [
+  {
+    id: 1,
+    stt: "01",
+    name: "Đẩy ngực ghế dốc / ngang bằng máy",
+    muscle: "Ngực",
+    thumb: "assets/thumb-01.jpg",
+    gif: "assets/demo-01.gif",
+    guide:
+      "Mở ngực, ghim hai bả vai xuống ghế. Hạ sâu để căng ngực, đẩy lên gần thẳng tay (không khóa khuỷu).",
+  },
+  {
+    id: 2,
+    stt: "02",
+    name: "Kéo cáp từ trên xuống",
+    muscle: "Lưng xô",
+    thumb: "assets/thumb-02.jpg",
+    gif: "assets/demo-02.gif",
+    guide:
+      "Ngực hơi ưỡn, kéo thanh về ngực trên bằng khuỷu tay. Tránh ngả người quá sâu ra sau.",
+  },
+  {
+    id: 3,
+    stt: "03",
+    name: "Đẩy vai bằng máy",
+    muscle: "Vai trước / giữa",
+    thumb: "assets/thumb-03.jpg",
+    gif: "assets/demo-03.gif",
+    guide:
+      "Lưng sát ghế, không võng lưng dưới. Hạ tay đến ngang tai hoặc cằm rồi đẩy lên có kiểm soát.",
+  },
+  {
+    id: 4,
+    stt: "04",
+    name: "Kéo máy ngang / Ngồi kéo ngang",
+    muscle: "Lưng giữa",
+    thumb: "assets/thumb-04.jpg",
+    gif: "assets/demo-04.gif",
+    guide:
+      "Giữ lưng thẳng, kéo tay cầm về rốn hoặc bụng dưới. Siết hai bả vai ở cuối nhịp, thả tạ chậm.",
+  },
+  {
+    id: 5,
+    stt: "05",
+    name: "Ép ngực bằng máy",
+    muscle: "Ngực",
+    thumb: "assets/thumb-05.jpg",
+    gif: "assets/demo-05.gif",
+    guide:
+      "Khuỷu hơi gập, giữ góc khuỷu ổn định. Tưởng tượng ép hai khuỷu tay vào nhau thay vì dùng lực bàn tay.",
+  },
+  {
+    id: 6,
+    stt: "06",
+    name: "Ngồi kéo cáp từ trên xuống góc chéo",
+    muscle: "Lưng",
+    thumb: "assets/thumb-06.jpg",
+    gif: "assets/demo-06.gif",
+    guide:
+      "Ngồi tựa ghế, kéo cáp từ trên cao xuống theo góc chéo (~45°). Kéo khuỷu tay xuống dưới và về sau hông.",
+  },
+  {
+    id: 7,
+    stt: "07",
+    name: "Bay vai",
+    muscle: "Vai giữa",
+    thumb: "assets/thumb-07.jpg",
+    gif: "assets/demo-07.gif",
+    guide:
+      "Hơi nghiêng người về trước, nâng tạ sang ngang bằng khuỷu đến ngang vai. Không nhún cầu vai.",
+  },
+  {
+    id: 8,
+    stt: "08",
+    name: "Kéo máy vai sau / Kéo cáp mặt",
+    muscle: "Vai sau",
+    thumb: "assets/thumb-08.jpg",
+    gif: "assets/demo-08.gif",
+    guide:
+      "Hạ vai, không rụt cổ. Mở khuỷu sang hai bên, tập trung siết cơ vai sau.",
+  },
+  {
+    id: 9,
+    stt: "09",
+    name: "Đẩy tay sau thanh ngang / dây cáp",
+    muscle: "Tay sau",
+    thumb: "assets/thumb-09.jpg",
+    gif: "assets/demo-09.gif",
+    guide:
+      "Giữ bắp tay sát sườn, cố định khuỷu. Chỉ chuyển động cẳng tay, duỗi hết mức thoải mái.",
+  },
+  {
+    id: 10,
+    stt: "10",
+    name: "Ngồi tựa ghế nghiêng cuốn tạ",
+    muscle: "Tay trước",
+    thumb: "assets/thumb-10.jpg",
+    gif: "assets/demo-10.gif",
+    guide:
+      "Đầu và lưng sát ghế, bắp tay thả tự nhiên. Cuốn tạ lên không đưa khuỷu ra trước.",
+  },
+  {
+    id: 11,
+    stt: "11",
+    name: "Kéo cáp tay sau hướng lên trên",
+    muscle: "Tay sau",
+    thumb: "assets/thumb-11.jpg",
+    gif: "assets/demo-11.gif",
+    guide:
+      "Hướng khuỷu lên trần và giữ ổn định. Hạ tay sâu ra sau đầu để kéo giãn tối đa đầu dài tay sau rồi duỗi lên.",
+  },
+  {
+    id: 12,
+    stt: "12",
+    name: "Ngồi máy / Đứng kéo cáp cuốn tay",
+    muscle: "Tay trước",
+    thumb: "assets/thumb-12.jpg",
+    gif: "assets/demo-12.gif",
+    guide:
+      "Cố định bắp tay trên đệm hoặc sát thân. Siết đỉnh tay trước 1 giây, hạ tạ chậm.",
+  },
+];
+
+const STORAGE_KEY = "upper_body_weights_v1";
+
+function loadWeights() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveWeights(weights) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(weights));
+}
+
+const weights = loadWeights();
+const workoutListEl = document.getElementById("workoutList");
+const modalEl = document.getElementById("mediaModal");
+const modalTitleEl = document.getElementById("modalTitle");
+const modalBadgeEl = document.getElementById("modalBadge");
+const modalImageEl = document.getElementById("modalImage");
+const modalGuideEl = document.getElementById("modalGuide");
+
+function renderWorkouts() {
+  workoutListEl.innerHTML = EXERCISES.map((ex) => {
+    const savedWeight = weights[ex.id] ?? "";
+    return `
+      <article class="workout-row" data-id="${ex.id}">
+        <div class="col-stt">${ex.stt}</div>
+        <div class="col-thumb">
+          <button
+            type="button"
+            class="thumb-btn"
+            data-open-id="${ex.id}"
+            aria-label="Xem GIF hướng dẫn bài ${ex.name}"
+            title="Bấm để xem GIF động tác"
+          >
+            <img src="${ex.thumb}" alt="${ex.name}" loading="lazy" />
+          </button>
+        </div>
+        <div class="col-exercise">
+          <h3 class="exercise-name">${ex.name}</h3>
+          <span class="muscle-tag">${ex.muscle}</span>
+        </div>
+        <div class="col-guide">${ex.guide}</div>
+        <div class="col-weight">
+          <label class="mobile-weight-label" for="weight-${ex.id}">Mức tạ:</label>
+          <div class="input-wrap">
+            <input
+              id="weight-${ex.id}"
+              class="weight-input"
+              type="text"
+              inputmode="decimal"
+              pattern="[0-9.,]*"
+              value="${String(savedWeight).replace(/"/g, "&quot;")}"
+              data-weight-id="${ex.id}"
+              aria-label="Mức tạ bài ${ex.name}"
+            />
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+// Lưu mức tạ tự động mỗi khi nhập, thay đổi hoặc xóa
+function handleWeightSave(e) {
+  const input = e.target.closest(".weight-input");
+  if (!input) return;
+
+  const id = input.dataset.weightId;
+  const val = input.value;
+  if (val === "") {
+    delete weights[id];
+  } else {
+    weights[id] = val;
+  }
+  saveWeights(weights);
+}
+
+workoutListEl.addEventListener("input", handleWeightSave);
+workoutListEl.addEventListener("change", handleWeightSave);
+
+// Mở Modal GIF khi bấm vào hình
+workoutListEl.addEventListener("click", (e) => {
+  const btn = e.target.closest(".thumb-btn");
+  if (!btn) return;
+
+  const id = Number(btn.dataset.openId);
+  const ex = EXERCISES.find((item) => item.id === id);
+  if (!ex) return;
+
+  modalBadgeEl.textContent = ex.muscle;
+  modalTitleEl.textContent = `${ex.stt}. ${ex.name}`;
+  modalImageEl.src = ex.thumb;
+  modalImageEl.alt = ex.name;
+  modalGuideEl.textContent = ex.guide;
+  modalEl.hidden = false;
+});
+
+function closeModal() {
+  modalEl.hidden = true;
+  modalImageEl.src = "";
+}
+
+document.getElementById("modalCloseBtn").addEventListener("click", closeModal);
+document.getElementById("modalBackdrop").addEventListener("click", closeModal);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !modalEl.hidden) {
+    closeModal();
+  }
+});
+
+renderWorkouts();

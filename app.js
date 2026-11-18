@@ -4,6 +4,7 @@ const EXERCISES = [
     stt: "01",
     name: "Đẩy ngực ghế dốc / ngang bằng máy",
     muscle: "Ngực",
+    variants: ["Ghế dốc", "Ghế ngang"],
     thumb: "assets/thumbs/01.png",
     detail: "assets/details/01.png",
     guide:
@@ -34,6 +35,7 @@ const EXERCISES = [
     stt: "04",
     name: "Kéo máy ngang / Ngồi kéo ngang",
     muscle: "Lưng giữa",
+    variants: ["Kéo máy", "Ngồi kéo"],
     thumb: "assets/thumbs/04.png",
     detail: "assets/details/04.png",
     guide:
@@ -54,6 +56,7 @@ const EXERCISES = [
     stt: "06",
     name: "Ngồi kéo cáp / Đứng kéo cáp",
     muscle: "Lưng",
+    variants: ["Ngồi kéo", "Đứng kéo"],
     thumb: "assets/thumbs/06.png",
     detail: "assets/details/06.png",
     guide:
@@ -74,6 +77,7 @@ const EXERCISES = [
     stt: "08",
     name: "Kéo máy vai sau / Kéo cáp mặt",
     muscle: "Vai sau",
+    variants: ["Kéo máy", "Kéo cáp"],
     thumb: "assets/thumbs/08.png",
     detail: "assets/details/08.png",
     guide:
@@ -84,6 +88,7 @@ const EXERCISES = [
     stt: "09",
     name: "Đẩy tay sau thanh ngang / dây cáp",
     muscle: "Tay sau",
+    variants: ["Thanh ngang", "Dây cáp"],
     thumb: "assets/thumbs/09.png",
     detail: "assets/details/09.png",
     guide:
@@ -114,6 +119,7 @@ const EXERCISES = [
     stt: "12",
     name: "Ngồi máy / Đứng kéo cáp cuốn tay",
     muscle: "Tay trước",
+    variants: ["Ngồi máy", "Đứng kéo"],
     thumb: "assets/thumbs/12.png",
     detail: "assets/details/12.png",
     guide:
@@ -136,8 +142,16 @@ function saveWeights(weights) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(weights));
   } catch {
-    // Bỏ qua nếu trình duyệt chặn storage (chế độ ẩn danh)
+    // Bỏ qua nếu trình duyệt chặn storage
   }
+}
+
+function sanitizeNumericInput(val) {
+  return String(val).replace(/[^0-9.,]/g, "");
+}
+
+function escapeAttr(str) {
+  return String(str).replace(/"/g, "&quot;");
 }
 
 const weights = loadWeights();
@@ -145,22 +159,56 @@ const workoutListEl = document.getElementById("workoutList");
 const modalEl = document.getElementById("mediaModal");
 const modalImageEl = document.getElementById("modalImage");
 
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
+function renderWeightInputs(ex) {
+  if (ex.variants && ex.variants.length === 2) {
+    return `
+      <div class="weight-pair">
+        ${ex.variants
+          .map((label, idx) => {
+            const key = `${ex.id}_${idx}`;
+            const val = sanitizeNumericInput(weights[key] ?? "");
+            return `
+              <div class="weight-slot">
+                <label class="slot-label" for="weight-${key}">${label}</label>
+                <input
+                  id="weight-${key}"
+                  class="weight-input"
+                  type="text"
+                  inputmode="decimal"
+                  pattern="[0-9.,]*"
+                  value="${escapeAttr(val)}"
+                  data-weight-key="${key}"
+                  aria-label="Mức tạ ${ex.name} (${label})"
+                />
+              </div>
+            `;
+          })
+          .join("")}
+      </div>
+    `;
+  }
 
-function autoResizeTextarea(el) {
-  el.style.height = "auto";
-  el.style.height = `${el.scrollHeight}px`;
+  const key = String(ex.id);
+  const val = sanitizeNumericInput(weights[key] ?? "");
+  return `
+    <div class="input-wrap">
+      <input
+        id="weight-${key}"
+        class="weight-input"
+        type="text"
+        inputmode="decimal"
+        pattern="[0-9.,]*"
+        value="${escapeAttr(val)}"
+        data-weight-key="${key}"
+        aria-label="Mức tạ bài ${ex.name}"
+      />
+    </div>
+  `;
 }
 
 function renderWorkouts() {
   workoutListEl.innerHTML = EXERCISES.map((ex) => {
-    const savedWeight = weights[ex.id] ?? "";
+    const labelTarget = ex.variants ? `${ex.id}_0` : String(ex.id);
     return `
       <article class="workout-row" data-id="${ex.id}">
         <div class="col-stt">${ex.stt}</div>
@@ -180,36 +228,31 @@ function renderWorkouts() {
         </div>
         <div class="col-guide">${ex.guide}</div>
         <div class="col-weight">
-          <label class="mobile-weight-label" for="weight-${ex.id}">Mức tạ:</label>
-          <div class="input-wrap">
-            <textarea
-              id="weight-${ex.id}"
-              class="weight-input"
-              rows="1"
-              data-weight-id="${ex.id}"
-              aria-label="Mức tạ bài ${ex.name}"
-            >${escapeHtml(savedWeight)}</textarea>
+          <label class="mobile-weight-label" for="weight-${labelTarget}">Mức tạ:</label>
+          <div class="weight-fields">
+            ${renderWeightInputs(ex)}
           </div>
         </div>
       </article>
     `;
   }).join("");
-
-  workoutListEl.querySelectorAll(".weight-input").forEach(autoResizeTextarea);
 }
 
-// Lưu mức tạ tự động mỗi khi nhập, thay đổi hoặc xóa
+// Chỉ cho nhập số (và dấu , hoặc .) và tự động lưu mãi mãi
 function handleWeightSave(e) {
   const input = e.target.closest(".weight-input");
   if (!input) return;
 
-  autoResizeTextarea(input);
-  const id = input.dataset.weightId;
-  const val = input.value;
-  if (val === "") {
-    delete weights[id];
+  const cleaned = sanitizeNumericInput(input.value);
+  if (input.value !== cleaned) {
+    input.value = cleaned;
+  }
+
+  const key = input.dataset.weightKey;
+  if (cleaned === "") {
+    delete weights[key];
   } else {
-    weights[id] = val;
+    weights[key] = cleaned;
   }
   saveWeights(weights);
 }
@@ -238,18 +281,18 @@ function closeModal() {
   document.body.style.overflow = "";
 }
 
-window.addEventListener("pagehide", () => saveWeights(weights));
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "hidden") {
-    saveWeights(weights);
-  }
-});
-
 document.getElementById("modalCloseBtn").addEventListener("click", closeModal);
 document.getElementById("modalBackdrop").addEventListener("click", closeModal);
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !modalEl.hidden) {
     closeModal();
+  }
+});
+
+window.addEventListener("pagehide", () => saveWeights(weights));
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") {
+    saveWeights(weights);
   }
 });
 

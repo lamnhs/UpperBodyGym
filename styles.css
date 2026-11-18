@@ -262,9 +262,34 @@ h1 span {
   color: #d2d2e0;
 }
 
-/* Single Weight Input */
+/* Weight Input (1 or 2 variants) */
 .mobile-weight-label {
   display: none;
+}
+
+.weight-fields {
+  flex: 1;
+}
+
+.weight-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.weight-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.slot-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .input-wrap {
@@ -280,15 +305,12 @@ h1 span {
   background: var(--bg);
   border: 1px solid rgba(168, 85, 247, 0.38);
   border-radius: 10px;
-  padding: 9px 12px;
+  padding: 9px 10px;
   color: var(--text);
   font-family: inherit;
-  font-size: 0.94rem;
-  font-weight: 600;
-  line-height: 1.4;
-  text-align: left;
-  resize: none;
-  overflow: hidden;
+  font-size: 0.96rem;
+  font-weight: 700;
+  text-align: center;
   outline: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
@@ -478,7 +500,7 @@ h1 span {
   .col-weight {
     grid-area: weight;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: 10px;
     padding-top: 4px;
   }
@@ -489,13 +511,14 @@ h1 span {
     font-weight: 700;
     color: var(--purple-bright);
     white-space: nowrap;
+    line-height: 44px;
   }
 
   .weight-input {
     min-height: 44px;
     font-size: 16px; /* Tránh iOS tự zoom khi focus */
-    text-align: left;
-    padding: 10px 14px;
+    text-align: center;
+    padding: 10px 10px;
   }
 
   .modal-close {

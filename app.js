@@ -133,7 +133,11 @@ function loadWeights() {
 }
 
 function saveWeights(weights) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(weights));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(weights));
+  } catch {
+    // Bỏ qua nếu trình duyệt chặn storage (chế độ ẩn danh)
+  }
 }
 
 const weights = loadWeights();
@@ -154,7 +158,7 @@ function renderWorkouts() {
             data-open-id="${ex.id}"
             aria-label="Xem hình lớn bài ${ex.name}"
           >
-            <img src="${ex.thumb}" alt="${ex.name}" loading="lazy" />
+            <img src="${ex.thumb}" alt="${ex.name}" decoding="async" />
           </button>
         </div>
         <div class="col-exercise">
@@ -212,12 +216,21 @@ workoutListEl.addEventListener("click", (e) => {
   modalImageEl.src = ex.detail;
   modalImageEl.alt = ex.name;
   modalEl.hidden = false;
+  document.body.style.overflow = "hidden";
 });
 
 function closeModal() {
   modalEl.hidden = true;
   modalImageEl.src = "";
+  document.body.style.overflow = "";
 }
+
+window.addEventListener("pagehide", () => saveWeights(weights));
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") {
+    saveWeights(weights);
+  }
+});
 
 document.getElementById("modalCloseBtn").addEventListener("click", closeModal);
 document.getElementById("modalBackdrop").addEventListener("click", closeModal);

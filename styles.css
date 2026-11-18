@@ -33,13 +33,14 @@ input {
 
 .bg-glow {
   position: fixed;
-  width: 420px;
-  height: 420px;
+  width: 360px;
+  height: 360px;
   border-radius: 50%;
-  filter: blur(130px);
-  opacity: 0.22;
+  filter: blur(90px);
+  opacity: 0.2;
   pointer-events: none;
   z-index: 0;
+  transform: translateZ(0);
 }
 
 .bg-glow-1 {

@@ -164,7 +164,7 @@ h1 span {
 .table-header,
 .workout-row {
   display: grid;
-  grid-template-columns: 54px 86px 1.2fr 1.65fr 140px;
+  grid-template-columns: 54px 72px 1.2fr 1.65fr 140px;
   align-items: center;
   gap: 14px;
   padding: 12px 18px;
@@ -215,21 +215,20 @@ h1 span {
 /* Thumbnail button */
 .thumb-btn {
   position: relative;
-  width: 82px;
-  height: 64px;
+  width: 68px;
+  height: 68px;
   padding: 0;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  background: #0b0b12;
+  border: none;
+  background: transparent;
   cursor: pointer;
-  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.15s ease, filter 0.15s ease;
 }
 
 .thumb-btn:hover {
-  transform: scale(1.04);
-  border-color: var(--purple-bright);
-  box-shadow: 0 0 16px rgba(168, 85, 247, 0.35);
+  transform: scale(1.05);
+  filter: brightness(1.08);
 }
 
 .thumb-btn img {
@@ -362,11 +361,9 @@ h1 span {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  background: #0b0b12;
+  background: transparent;
   display: grid;
   place-items: center;
-  padding: 12px;
 }
 
 .modal-image {
@@ -449,7 +446,7 @@ h1 span {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 14px;
-    grid-template-columns: 38px 76px 1fr;
+    grid-template-columns: 38px 64px 1fr;
     grid-template-areas:
       "stt thumb exercise"
       "guide guide guide"
@@ -471,8 +468,8 @@ h1 span {
   }
 
   .thumb-btn {
-    width: 76px;
-    height: 60px;
+    width: 64px;
+    height: 64px;
   }
 
   .col-exercise {

@@ -139,10 +139,7 @@ function saveWeights(weights) {
 const weights = loadWeights();
 const workoutListEl = document.getElementById("workoutList");
 const modalEl = document.getElementById("mediaModal");
-const modalTitleEl = document.getElementById("modalTitle");
-const modalBadgeEl = document.getElementById("modalBadge");
 const modalImageEl = document.getElementById("modalImage");
-const modalGuideEl = document.getElementById("modalGuide");
 
 function renderWorkouts() {
   workoutListEl.innerHTML = EXERCISES.map((ex) => {
@@ -212,11 +209,8 @@ workoutListEl.addEventListener("click", (e) => {
   const ex = EXERCISES.find((item) => item.id === id);
   if (!ex) return;
 
-  modalBadgeEl.textContent = ex.muscle;
-  modalTitleEl.textContent = `${ex.stt}. ${ex.name}`;
   modalImageEl.src = ex.detail;
   modalImageEl.alt = ex.name;
-  modalGuideEl.textContent = ex.guide;
   modalEl.hidden = false;
 });
 

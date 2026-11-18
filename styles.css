@@ -316,40 +316,26 @@ h1 span {
 .modal-dialog {
   position: relative;
   z-index: 1;
-  width: 100%;
-  max-width: 500px;
-  background: #141422;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 18px 20px 20px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
-}
-
-.modal-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.modal-title {
-  margin: 8px 0 0;
-  font-size: 1.08rem;
-  font-weight: 700;
+  width: auto;
+  max-width: min(520px, 94vw);
+  background: transparent;
+  padding: 0;
 }
 
 .modal-close {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  border: 1px solid var(--border-soft);
-  background: rgba(255, 255, 255, 0.05);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(14, 14, 24, 0.85);
   color: var(--text);
   font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
-  flex-shrink: 0;
 }
 
 .modal-close:hover {
@@ -359,26 +345,20 @@ h1 span {
 
 .modal-media-wrap {
   position: relative;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
   background: transparent;
   display: grid;
   place-items: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
 }
 
 .modal-image {
   width: 100%;
-  max-width: 440px;
-  max-height: 62vh;
+  max-width: 520px;
+  max-height: 85vh;
   display: block;
   object-fit: contain;
-  border-radius: 8px;
-}
-
-.modal-guide {
-  margin: 14px 0 0;
-  font-size: 0.88rem;
-  color: #d6d6e4;
 }
 
 /* Responsive (Mobile-first card layout) */
@@ -510,12 +490,6 @@ h1 span {
     font-size: 16px; /* Tránh iOS tự zoom khi focus */
     text-align: left;
     padding: 10px 14px;
-  }
-
-  .modal-dialog {
-    padding: 16px;
-    max-height: 90vh;
-    overflow-y: auto;
   }
 
   .modal-close {

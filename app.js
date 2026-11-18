@@ -4,8 +4,8 @@ const EXERCISES = [
     stt: "01",
     name: "Đẩy ngực ghế dốc / ngang bằng máy",
     muscle: "Ngực",
-    thumb: "assets/thumb-01.jpg",
-    gif: "assets/demo-01.gif",
+    thumb: "assets/thumbs/01.png",
+    detail: "assets/details/01.png",
     guide:
       "Mở ngực, ghim hai bả vai xuống ghế. Hạ sâu để căng ngực, đẩy lên gần thẳng tay (không khóa khuỷu).",
   },
@@ -14,8 +14,8 @@ const EXERCISES = [
     stt: "02",
     name: "Kéo cáp từ trên xuống",
     muscle: "Lưng xô",
-    thumb: "assets/thumb-02.jpg",
-    gif: "assets/demo-02.gif",
+    thumb: "assets/thumbs/02.png",
+    detail: "assets/details/02.png",
     guide:
       "Ngực hơi ưỡn, kéo thanh về ngực trên bằng khuỷu tay. Tránh ngả người quá sâu ra sau.",
   },
@@ -24,8 +24,8 @@ const EXERCISES = [
     stt: "03",
     name: "Đẩy vai bằng máy",
     muscle: "Vai trước / giữa",
-    thumb: "assets/thumb-03.jpg",
-    gif: "assets/demo-03.gif",
+    thumb: "assets/thumbs/03.png",
+    detail: "assets/details/03.png",
     guide:
       "Lưng sát ghế, không võng lưng dưới. Hạ tay đến ngang tai hoặc cằm rồi đẩy lên có kiểm soát.",
   },
@@ -34,8 +34,8 @@ const EXERCISES = [
     stt: "04",
     name: "Kéo máy ngang / Ngồi kéo ngang",
     muscle: "Lưng giữa",
-    thumb: "assets/thumb-04.jpg",
-    gif: "assets/demo-04.gif",
+    thumb: "assets/thumbs/04.png",
+    detail: "assets/details/04.png",
     guide:
       "Giữ lưng thẳng, kéo tay cầm về rốn hoặc bụng dưới. Siết hai bả vai ở cuối nhịp, thả tạ chậm.",
   },
@@ -44,8 +44,8 @@ const EXERCISES = [
     stt: "05",
     name: "Ép ngực bằng máy",
     muscle: "Ngực",
-    thumb: "assets/thumb-05.jpg",
-    gif: "assets/demo-05.gif",
+    thumb: "assets/thumbs/05.png",
+    detail: "assets/details/05.png",
     guide:
       "Khuỷu hơi gập, giữ góc khuỷu ổn định. Tưởng tượng ép hai khuỷu tay vào nhau thay vì dùng lực bàn tay.",
   },
@@ -54,8 +54,8 @@ const EXERCISES = [
     stt: "06",
     name: "Ngồi kéo cáp từ trên xuống góc chéo",
     muscle: "Lưng",
-    thumb: "assets/thumb-06.jpg",
-    gif: "assets/demo-06.gif",
+    thumb: "assets/thumbs/06.png",
+    detail: "assets/details/06.png",
     guide:
       "Ngồi tựa ghế, kéo cáp từ trên cao xuống theo góc chéo (~45°). Kéo khuỷu tay xuống dưới và về sau hông.",
   },
@@ -64,8 +64,8 @@ const EXERCISES = [
     stt: "07",
     name: "Bay vai",
     muscle: "Vai giữa",
-    thumb: "assets/thumb-07.jpg",
-    gif: "assets/demo-07.gif",
+    thumb: "assets/thumbs/07.png",
+    detail: "assets/details/07.png",
     guide:
       "Hơi nghiêng người về trước, nâng tạ sang ngang bằng khuỷu đến ngang vai. Không nhún cầu vai.",
   },
@@ -74,8 +74,8 @@ const EXERCISES = [
     stt: "08",
     name: "Kéo máy vai sau / Kéo cáp mặt",
     muscle: "Vai sau",
-    thumb: "assets/thumb-08.jpg",
-    gif: "assets/demo-08.gif",
+    thumb: "assets/thumbs/08.png",
+    detail: "assets/details/08.png",
     guide:
       "Hạ vai, không rụt cổ. Mở khuỷu sang hai bên, tập trung siết cơ vai sau.",
   },
@@ -84,8 +84,8 @@ const EXERCISES = [
     stt: "09",
     name: "Đẩy tay sau thanh ngang / dây cáp",
     muscle: "Tay sau",
-    thumb: "assets/thumb-09.jpg",
-    gif: "assets/demo-09.gif",
+    thumb: "assets/thumbs/09.png",
+    detail: "assets/details/09.png",
     guide:
       "Giữ bắp tay sát sườn, cố định khuỷu. Chỉ chuyển động cẳng tay, duỗi hết mức thoải mái.",
   },
@@ -94,8 +94,8 @@ const EXERCISES = [
     stt: "10",
     name: "Ngồi tựa ghế nghiêng cuốn tạ",
     muscle: "Tay trước",
-    thumb: "assets/thumb-10.jpg",
-    gif: "assets/demo-10.gif",
+    thumb: "assets/thumbs/10.png",
+    detail: "assets/details/10.png",
     guide:
       "Đầu và lưng sát ghế, bắp tay thả tự nhiên. Cuốn tạ lên không đưa khuỷu ra trước.",
   },
@@ -104,8 +104,8 @@ const EXERCISES = [
     stt: "11",
     name: "Kéo cáp tay sau hướng lên trên",
     muscle: "Tay sau",
-    thumb: "assets/thumb-11.jpg",
-    gif: "assets/demo-11.gif",
+    thumb: "assets/thumbs/11.png",
+    detail: "assets/details/11.png",
     guide:
       "Hướng khuỷu lên trần và giữ ổn định. Hạ tay sâu ra sau đầu để kéo giãn tối đa đầu dài tay sau rồi duỗi lên.",
   },
@@ -114,8 +114,8 @@ const EXERCISES = [
     stt: "12",
     name: "Ngồi máy / Đứng kéo cáp cuốn tay",
     muscle: "Tay trước",
-    thumb: "assets/thumb-12.jpg",
-    gif: "assets/demo-12.gif",
+    thumb: "assets/thumbs/12.png",
+    detail: "assets/details/12.png",
     guide:
       "Cố định bắp tay trên đệm hoặc sát thân. Siết đỉnh tay trước 1 giây, hạ tạ chậm.",
   },
@@ -155,8 +155,7 @@ function renderWorkouts() {
             type="button"
             class="thumb-btn"
             data-open-id="${ex.id}"
-            aria-label="Xem GIF hướng dẫn bài ${ex.name}"
-            title="Bấm để xem GIF động tác"
+            aria-label="Xem hình lớn bài ${ex.name}"
           >
             <img src="${ex.thumb}" alt="${ex.name}" loading="lazy" />
           </button>
@@ -204,7 +203,7 @@ function handleWeightSave(e) {
 workoutListEl.addEventListener("input", handleWeightSave);
 workoutListEl.addEventListener("change", handleWeightSave);
 
-// Mở Modal GIF khi bấm vào hình
+// Mở Modal xem hình chi tiết khi bấm vào hình nhỏ
 workoutListEl.addEventListener("click", (e) => {
   const btn = e.target.closest(".thumb-btn");
   if (!btn) return;
@@ -215,7 +214,7 @@ workoutListEl.addEventListener("click", (e) => {
 
   modalBadgeEl.textContent = ex.muscle;
   modalTitleEl.textContent = `${ex.stt}. ${ex.name}`;
-  modalImageEl.src = ex.thumb;
+  modalImageEl.src = ex.detail;
   modalImageEl.alt = ex.name;
   modalGuideEl.textContent = ex.guide;
   modalEl.hidden = false;

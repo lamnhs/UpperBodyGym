@@ -52,7 +52,7 @@ const EXERCISES = [
   {
     id: 6,
     stt: "06",
-    name: "Ngồi kéo cáp từ trên xuống góc chéo",
+    name: "Ngồi kéo cáp / Đứng kéo cáp",
     muscle: "Lưng",
     thumb: "assets/thumbs/06.png",
     detail: "assets/details/06.png",
